@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/MediscreenPatientHistoryMicroservice.iml" filepath="$PROJECT_DIR$/.idea/MediscreenPatientHistoryMicroservice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/microservice-notes/microservice-patient-history.iml" filepath="$PROJECT_DIR$/microservice-notes/microservice-patient-history.iml" />
+      <module fileurl="file://$PROJECT_DIR$/microservice-patient-history/microservice-patientHistory.iml" filepath="$PROJECT_DIR$/microservice-patient-history/microservice-patientHistory.iml" />
+    </modules>
+  </component>
+</project>
