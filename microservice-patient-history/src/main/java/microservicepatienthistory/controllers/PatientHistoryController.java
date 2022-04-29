@@ -22,19 +22,14 @@ public class PatientHistoryController {
         this.patientHistoryService = patientHistoryService;
     }
 
-    @GetMapping("/patientHistory/home")
-    public String home(){
-        return "home";
-    }
-
-    @GetMapping("/patientHistory/list")
-    public String userNotesList(Model model){
+    @GetMapping("patientHistory/list")
+    public String findPatientHistoryList(Model model){
         model.addAttribute("patientHistoryList", patientHistoryService.findAll());
         return "patientHistory/list";
     }
 
     @GetMapping("/patientHistory/add")
-    public String addUserNotes(PatientHistory patientHistory, Model model){
+    public String add(PatientHistory patientHistory, Model model){
         model.addAttribute("patientHistory", patientHistory);
         return "patientHistory/add";
     }

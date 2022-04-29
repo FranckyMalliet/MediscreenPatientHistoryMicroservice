@@ -43,4 +43,9 @@ public class PatientHistoryService {
         logger.debug("Deleting userNotes with id number : " + patientHistoryId);
         patientHistoryRepository.deleteById(patientHistoryId);
     }
+
+    public List<PatientHistory> findAllById(int patientId){
+        logger.debug("Retrieving all patientHistory from user with id number : " + patientId);
+        return patientHistoryRepository.findAllPatientHistoryById(patientId);
+    }
 }

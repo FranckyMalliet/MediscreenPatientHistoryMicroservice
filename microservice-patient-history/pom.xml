@@ -11,9 +11,7 @@
 	</parent>
 
 	<groupId>mediscreen</groupId>
-	<artifactId>microservice-patientHistory</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>microservice-patientHistory</name>
+	<artifactId>microservicePatientHistory</artifactId>
 	<description>Mediscreen Patient History Microservice</description>
 
 	<properties>
