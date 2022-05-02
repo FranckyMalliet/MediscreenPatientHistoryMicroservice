@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PatientHistoryController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">microservicePatientHistory</a> &gt; <a href="index.source.html" class="el_package">microservicepatienthistory.controllers</a> &gt; <span class="el_source">PatientHistoryController.java</span></div><h1>PatientHistoryController.java</h1><pre class="source lang-java linenums">package microservicepatienthistory.controllers;
+
+import microservicepatienthistory.models.PatientHistory;
+import microservicepatienthistory.services.PatientHistoryService;
+import org.bson.types.ObjectId;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+
+@Controller
+public class PatientHistoryController {
+
+<span class="fc" id="L18">    private static Logger logger = LoggerFactory.getLogger(PatientHistoryController.class);</span>
+    private PatientHistoryService patientHistoryService;
+
+<span class="fc" id="L21">    public PatientHistoryController(PatientHistoryService patientHistoryService){</span>
+<span class="fc" id="L22">        this.patientHistoryService = patientHistoryService;</span>
+<span class="fc" id="L23">    }</span>
+
+    @GetMapping(&quot;patientHistory/list&quot;)
+    public String findPatientHistoryList(Model model){
+<span class="fc" id="L27">        model.addAttribute(&quot;patientHistoryList&quot;, patientHistoryService.findAll());</span>
+<span class="fc" id="L28">        return &quot;patientHistory/list&quot;;</span>
+    }
+
+    @GetMapping(&quot;/patientHistory/add&quot;)
+    public String add(PatientHistory patientHistory, Model model){
+<span class="fc" id="L33">        model.addAttribute(&quot;patientHistory&quot;, patientHistory);</span>
+<span class="fc" id="L34">        return &quot;patientHistory/add&quot;;</span>
+    }
+
+    @PostMapping(&quot;/patientHistory/validate&quot;)
+    public String validate(@Valid PatientHistory patientHistory, Model model, BindingResult result){
+<span class="pc bpc" id="L39" title="1 of 2 branches missed.">        if(result.hasErrors()){</span>
+<span class="nc" id="L40">            logger.debug(&quot;patientHistory incorrect&quot;);</span>
+<span class="nc" id="L41">            return &quot;patientHistory/add&quot;;</span>
+        }
+
+<span class="fc" id="L44">        patientHistoryService.add(patientHistory);</span>
+
+<span class="fc" id="L46">        logger.debug(&quot;Adding a new patientHistory to mongo database&quot;);</span>
+<span class="fc" id="L47">        model.addAttribute(&quot;patientHistoryList&quot;, patientHistoryService.findAll());</span>
+<span class="fc" id="L48">        return &quot;redirect:/patientHistory/list&quot;;</span>
+    }
+
+    @GetMapping(&quot;/patientHistory/update/{id}&quot;)
+    public String showUpdateForm(@PathVariable(&quot;id&quot;) ObjectId patientHistoryId, Model model){
+<span class="fc" id="L53">        PatientHistory patientHistory = patientHistoryService.findById(patientHistoryId);</span>
+<span class="fc" id="L54">        model.addAttribute(&quot;patientHistory&quot;, patientHistory);</span>
+<span class="fc" id="L55">        return &quot;patientHistory/update&quot;;</span>
+    }
+
+    @PostMapping(&quot;patientHistory/update/{id}&quot;)
+    public String update(@PathVariable(&quot;id&quot;) ObjectId patientHistoryId, @Valid PatientHistory patientHistory, Model model, BindingResult result){
+<span class="nc bnc" id="L60" title="All 2 branches missed.">        if(result.hasErrors()){</span>
+<span class="nc" id="L61">            logger.debug(&quot;PatientHistory not found or incorrect&quot;);</span>
+<span class="nc" id="L62">            return &quot;patientHistory/update&quot;;</span>
+        }
+
+<span class="nc" id="L65">        patientHistory.setPatientHistoryId(patientHistoryId);</span>
+<span class="nc" id="L66">        patientHistoryService.update(patientHistory);</span>
+
+<span class="nc" id="L68">        logger.debug(&quot;Updating patientHistory number &quot; + patientHistory.getPatientHistoryId());</span>
+<span class="nc" id="L69">        model.addAttribute(&quot;patientHistoryList&quot;, patientHistoryService.findAll());</span>
+<span class="nc" id="L70">        return &quot;redirect:/patientHistory/list&quot;;</span>
+    }
+
+    @GetMapping(&quot;/patientHistory/delete/{id}&quot;)
+    public String delete(@PathVariable(&quot;id&quot;) ObjectId patientHistoryId, Model model){
+<span class="nc" id="L75">        logger.debug(&quot;Deleting patient with id number : &quot; + patientHistoryId);</span>
+<span class="nc" id="L76">        patientHistoryService.delete(patientHistoryId);</span>
+<span class="nc" id="L77">        model.addAttribute(&quot;patientHistoryList&quot;, patientHistoryService.findAll());</span>
+<span class="nc" id="L78">        return &quot;redirect:/patientHistory/list&quot;;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
