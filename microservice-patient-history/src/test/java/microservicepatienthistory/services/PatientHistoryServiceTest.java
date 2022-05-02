@@ -39,4 +39,16 @@ public class PatientHistoryServiceTest {
         Exception exception = Assertions.assertThrows(IllegalArgumentException.class, () -> patientHistoryService.findById(patientHistory.getPatientHistoryId()));
         Assertions.assertEquals("Invalid patient history Id " + patientHistory.getPatientHistoryId(), exception.getMessage());
     }
+
+    @Test
+    public void findAllByIdTest(){
+        //GIVEN
+        int patientId = 5;
+
+        //WHEN
+        List<PatientHistory> patientHistoryList = patientHistoryService.findAllById(patientId);
+
+        //THEN
+        Assertions.assertNotNull(patientHistoryList);
+    }
 }

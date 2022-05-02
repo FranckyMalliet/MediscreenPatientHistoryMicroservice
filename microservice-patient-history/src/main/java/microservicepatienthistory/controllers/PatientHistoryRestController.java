@@ -17,8 +17,8 @@ public class PatientHistoryRestController {
         this.patientHistoryService = patientHistoryService;
     }
 
-    @GetMapping("index")
-    public String home(){
+    @GetMapping("/index")
+    public String greetingsMessage(){
         return "Greetings from patientHistory !";
     }
 
@@ -28,7 +28,7 @@ public class PatientHistoryRestController {
     }
 
     @GetMapping("/patientHistory/assess/patientHistoryId")
-    public List<PatientHistory> findPatientHistoryListById(@RequestParam("id") int patientId){
+    public List<PatientHistory> findPatientHistoryListById(@RequestParam("patientId") int patientId){
         return patientHistoryService.findAllById(patientId);
     }
 }

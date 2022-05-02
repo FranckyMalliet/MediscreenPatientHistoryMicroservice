@@ -33,12 +33,6 @@ public class PatientHistoryControllerTest {
     }
 
     @Test
-    public void givenAnUrl_ReturnAHomePageOfThisMicroservice() throws Exception {
-        mockMvc.perform(get("/patientHistory/home"))
-                .andExpect(status().isOk());
-    }
-
-    @Test
     public void givenAnUrl_ReturnAPageWithAllPatientHistories() throws Exception {
         mockMvc.perform(get("/patientHistory/list"))
                 .andExpect(status().isOk());
