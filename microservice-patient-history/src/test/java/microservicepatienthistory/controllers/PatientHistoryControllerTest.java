@@ -1,5 +1,8 @@
 package microservicepatienthistory.controllers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import microservicepatienthistory.models.PatientHistory;
 import microservicepatienthistory.services.PatientHistoryService;
 import org.junit.jupiter.api.Assertions;
@@ -7,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
@@ -88,6 +92,17 @@ public class PatientHistoryControllerTest {
         Assertions.assertNotNull(patientHistoryService.findById(patientHistory.getPatientHistoryId()));
 
         patientHistory.setNotes("I am in trouble !");
+
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
+        ObjectWriter objectWriter = mapper.writer().withDefaultPrettyPrinter();
+        String jsonRequest = objectWriter.writeValueAsString(patientHistory);
+
+        mockMvc.perform(post("/patientHistory/update/{id}", patientHistory.getPatientHistoryId())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jsonRequest))
+                .andExpect(status().isFound());
+
         patientHistoryService.update(patientHistory);
         Assertions.assertEquals("I am in trouble !", patientHistoryService.findById(patientHistory.getPatientHistoryId()).getNotes());
 
@@ -106,7 +121,9 @@ public class PatientHistoryControllerTest {
         patientHistoryService.add(patientHistory);
         Assertions.assertNotNull(patientHistoryService.findById(patientHistory.getPatientHistoryId()));
 
-        patientHistoryService.delete(patientHistory.getPatientHistoryId());
+        mockMvc.perform(get("/patientHistory/delete/{id}", patientHistory.getPatientHistoryId()))
+                .andExpect(status().isFound());
+
         Exception exception = Assertions.assertThrows(IllegalArgumentException.class, () -> patientHistoryService.findById(patientHistory.getPatientHistoryId()));
         Assertions.assertEquals("Invalid patient history Id " + patientHistory.getPatientHistoryId(), exception.getMessage());
 

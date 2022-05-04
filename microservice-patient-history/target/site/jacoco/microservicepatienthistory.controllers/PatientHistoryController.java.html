@@ -57,25 +57,25 @@ public class PatientHistoryController {
 
     @PostMapping(&quot;patientHistory/update/{id}&quot;)
     public String update(@PathVariable(&quot;id&quot;) ObjectId patientHistoryId, @Valid PatientHistory patientHistory, Model model, BindingResult result){
-<span class="nc bnc" id="L60" title="All 2 branches missed.">        if(result.hasErrors()){</span>
+<span class="pc bpc" id="L60" title="1 of 2 branches missed.">        if(result.hasErrors()){</span>
 <span class="nc" id="L61">            logger.debug(&quot;PatientHistory not found or incorrect&quot;);</span>
 <span class="nc" id="L62">            return &quot;patientHistory/update&quot;;</span>
         }
 
-<span class="nc" id="L65">        patientHistory.setPatientHistoryId(patientHistoryId);</span>
-<span class="nc" id="L66">        patientHistoryService.update(patientHistory);</span>
+<span class="fc" id="L65">        patientHistory.setPatientHistoryId(patientHistoryId);</span>
+<span class="fc" id="L66">        patientHistoryService.update(patientHistory);</span>
 
-<span class="nc" id="L68">        logger.debug(&quot;Updating patientHistory number &quot; + patientHistory.getPatientHistoryId());</span>
-<span class="nc" id="L69">        model.addAttribute(&quot;patientHistoryList&quot;, patientHistoryService.findAll());</span>
-<span class="nc" id="L70">        return &quot;redirect:/patientHistory/list&quot;;</span>
+<span class="fc" id="L68">        logger.debug(&quot;Updating patientHistory number &quot; + patientHistory.getPatientHistoryId());</span>
+<span class="fc" id="L69">        model.addAttribute(&quot;patientHistoryList&quot;, patientHistoryService.findAll());</span>
+<span class="fc" id="L70">        return &quot;redirect:/patientHistory/list&quot;;</span>
     }
 
     @GetMapping(&quot;/patientHistory/delete/{id}&quot;)
     public String delete(@PathVariable(&quot;id&quot;) ObjectId patientHistoryId, Model model){
-<span class="nc" id="L75">        logger.debug(&quot;Deleting patient with id number : &quot; + patientHistoryId);</span>
-<span class="nc" id="L76">        patientHistoryService.delete(patientHistoryId);</span>
-<span class="nc" id="L77">        model.addAttribute(&quot;patientHistoryList&quot;, patientHistoryService.findAll());</span>
-<span class="nc" id="L78">        return &quot;redirect:/patientHistory/list&quot;;</span>
+<span class="fc" id="L75">        logger.debug(&quot;Deleting patient with id number : &quot; + patientHistoryId);</span>
+<span class="fc" id="L76">        patientHistoryService.delete(patientHistoryId);</span>
+<span class="fc" id="L77">        model.addAttribute(&quot;patientHistoryList&quot;, patientHistoryService.findAll());</span>
+<span class="fc" id="L78">        return &quot;redirect:/patientHistory/list&quot;;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

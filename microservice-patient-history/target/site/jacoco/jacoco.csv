@@ -1,6 +1,6 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
 microservicePatientHistory,microservicepatienthistory.services,PatientHistoryService,0,75,0,0,0,19,0,9,0,9
-microservicePatientHistory,microservicepatienthistory.controllers,PatientHistoryController,51,57,3,1,14,16,4,6,2,6
+microservicePatientHistory,microservicepatienthistory.controllers,PatientHistoryController,10,98,2,2,4,26,2,8,0,8
 microservicePatientHistory,microservicepatienthistory.controllers,PatientHistoryRestController,0,17,0,0,0,6,0,4,0,4
-microservicePatientHistory,microservicepatienthistory.models,PatientHistory,4,20,0,0,2,8,1,6,1,6
+microservicePatientHistory,microservicepatienthistory.models,PatientHistory,0,24,0,0,0,10,0,7,0,7
 microservicePatientHistory,microservicepatienthistory,MicroservicePatientHistoryApplication,5,3,0,0,2,1,1,1,1,1
